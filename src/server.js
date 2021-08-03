@@ -4,7 +4,7 @@ import bodyParser from "koa-bodyparser";
 import { handler } from "./handler.js";
 
 const PORT = process.env.PORT || 3000;
-const URI = process.env.MONGODB_URI || "mongodb://mongo:development@localhost:27017/indiweb";
+const URI = process.env.MONGODB_URI || "mongodb://localhost:27017/indiweb";
 
 const app = new Koa();
 app.context.mongo = MongoClient.connect(URI);
