@@ -11,7 +11,7 @@ test("save locations", async () => {
   const collection = client.db().collection("locations");
 
   // cleanup
-  await collection.deleteMany({})
+  await collection.deleteMany({});
 
   const response = await request(app.callback())
     .post("/")
