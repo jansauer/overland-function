@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`save locations 1`] = `
+Object {
+  "geometry": Object {
+    "coordinates": Object {
+      "latitude": 37.3318,
+      "longitude": -122.030581,
+    },
+    "type": "Point",
+  },
+  "properties": Object {
+    "activity": "other_navigation",
+    "altitude": 0,
+    "battery_level": 0.89,
+    "battery_state": "charging",
+    "deferred": 1000,
+    "desired_accuracy": 100,
+    "device_id": "",
+    "horizontal_accuracy": 30,
+    "locations_in_payload": 1,
+    "motion": Array [
+      "driving",
+      "stationary",
+    ],
+    "pauses": false,
+    "significant_change": "disabled",
+    "speed": 4,
+    "timestamp": "2015-10-01T08:00:00-0700",
+    "vertical_accuracy": -1,
+    "wifi": "launchpad",
+  },
+  "type": "Feature",
+}
+`;
+
+exports[`save locations 2`] = `
+Object {
+  "geometry": Object {
+    "coordinates": Array [
+      9.726020060879991,
+      52.38405362185702,
+    ],
+    "type": "Point",
+  },
+  "properties": Object {
+    "altitude": 55,
+    "battery_level": 0.7699999809265137,
+    "battery_state": "unplugged",
+    "device_id": "iphonex",
+    "horizontal_accuracy": 65,
+    "motion": Array [],
+    "speed": -1,
+    "timestamp": "2021-08-03T09:44:24Z",
+    "vertical_accuracy": 20,
+    "wifi": "Alderaan Legacy",
+  },
+  "type": "Feature",
+}
+`;

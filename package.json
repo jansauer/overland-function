@@ -1,0 +1,30 @@
+{
+  "name": "overland-function",
+  "version": "0.1.0",
+  "description": "Building myself some api.",
+  "homepage": "https://github.com/jansauer/overland-function",
+  "repository": "github:jansauer/overland-function",
+  "author": "Jan Sauer <jan@jansauer.de> (https://jansauer.de)",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --silent --colors",
+    "lint": "npm run lint:prettier && npm run lint:js",
+    "lint:prettier": "prettier --check .",
+    "lint:js": "eslint --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "koa": "2.13.1",
+    "koa-bodyparser": "2.5.0",
+    "mongodb": "4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "jest": "27.0.6",
+    "prettier": "2.2.1",
+    "supertest": "6.1.3"
+  }
+}

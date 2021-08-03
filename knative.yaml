@@ -1,0 +1,43 @@
+kind: Service
+apiVersion: serving.knative.dev/v1
+metadata:
+  name: overland
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/jansauer/overland-function:latest
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: overland
+                  key: mongodb-uri
+
+---
+kind: Middleware
+apiVersion: traefik.containo.us/v1alpha1
+metadata:
+  name: overland
+spec:
+  headers:
+    customRequestHeaders:
+      Host: "overland.default.example.com"
+
+---
+kind: IngressRoute
+apiVersion: traefik.containo.us/v1alpha1
+metadata:
+  name: overland
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`overland.jansauer.de`)
+      kind: Rule
+      middlewares:
+        - name: overland
+      services:
+        - name: kourier
+          namespace: kourier-system
+          port: 80
