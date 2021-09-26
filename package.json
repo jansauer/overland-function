@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "koa": "2.13.3",
-    "koa-bodyparser": "2.5.0",
+    "koa-bodyparser": "4.3.0",
     "mongodb": "4.1.2"
   },
   "devDependencies": {
