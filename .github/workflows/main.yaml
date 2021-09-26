@@ -47,11 +47,11 @@ jobs:
         id: image
         with:
           context: .
-          # push: true
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: |
-            user/app:latest
+            ghcr.io/jansauer/overland-function:latest
 
       - name: Set image version
         run: sed -i s%latest%${{ steps.meta.outputs.version }}@${{ steps.image.outputs.digest }}% knative.yaml
