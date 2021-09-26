@@ -3,7 +3,6 @@ apiVersion: serving.knative.dev/v1
 metadata:
   name: overland
 spec:
-  revisionHistoryLimit: 3
   template:
     spec:
       containers:
