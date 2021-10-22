@@ -16,7 +16,7 @@
     "lint:js": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
-    "koa": "2.13.3",
+    "koa": "2.13.4",
     "koa-bodyparser": "4.3.0",
     "mongodb": "4.1.2"
   },
