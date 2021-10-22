@@ -54,7 +54,7 @@ jobs:
             ghcr.io/jansauer/overland-function:latest
 
       - name: Set image version
-        run: sed -i s%latest%${{ steps.meta.outputs.version }}@${{ steps.image.outputs.digest }}% knative.yaml
+        run: sed -i s%latest%${{ steps.meta.outputs.version }}% knative.yaml
 
       - uses: actions-hub/kubectl@master
         env:
