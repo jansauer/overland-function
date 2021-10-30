@@ -1,5 +1,5 @@
 {
-  "labels": ["renovate"],
   "rangeStrategy": "pin",
+  "labels": ["renovate"],
   "automerge": true
 }
