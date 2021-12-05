@@ -11,20 +11,22 @@
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --colors",
-    "lint": "npm run lint:prettier && npm run lint:js",
+    "lint": "npm run lint:node && npm run lint:prettier && npm run lint:js",
+    "lint:node": "grep -q $(node -v | cut -c2-) .node-version && grep -q $(node -v | cut -c2-) Dockerfile",
     "lint:prettier": "prettier --check .",
     "lint:js": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "koa": "2.13.4",
     "koa-bodyparser": "4.3.0",
+    "koa-router": "10.1.1",
     "mongodb": "4.2.1"
   },
   "devDependencies": {
-    "eslint": "8.3.0",
+    "eslint": "8.4.0",
     "eslint-config-prettier": "8.3.0",
     "jest": "27.4.3",
-    "prettier": "2.5.0",
+    "prettier": "2.5.1",
     "supertest": "6.1.6"
   }
 }

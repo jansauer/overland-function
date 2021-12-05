@@ -9,7 +9,11 @@ Function for receiving location recordings from [Overland](https://overland.p3k.
 ## Getting Started
 
 ```
-$ docker run -d --name mongo -p 27017:27017 mongo
+$ docker run -d --name mongo \
+    -p 27017:27017 \
+    -e MONGO_INITDB_ROOT_USERNAME=root \
+    -e MONGO_INITDB_ROOT_PASSWORD=dev \
+    mongo
 $ npm ic
 $ npm run lint
 $ npm run test
