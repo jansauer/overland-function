@@ -7,5 +7,5 @@ CMD ["node", "server.js"]
 EXPOSE 3000
 
 WORKDIR /usr/src/app
-ADD package*.json src/*.js ./
+ADD package*.json src/ ./
 RUN npm ci --only=production
