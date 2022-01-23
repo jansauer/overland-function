@@ -4,6 +4,28 @@ exports[`save locations 1`] = `
 Array [
   Object {
     "geometry": Object {
+      "coordinates": Array [
+        9.726020060879991,
+        52.38405362185702,
+      ],
+      "type": "Point",
+    },
+    "properties": Object {
+      "altitude": 55,
+      "battery_level": 0.7699999809265137,
+      "battery_state": "unplugged",
+      "device_id": "iphonex",
+      "horizontal_accuracy": 65,
+      "motion": Array [],
+      "speed": -1,
+      "timestamp": "2021-08-03T09:44:24Z",
+      "vertical_accuracy": 20,
+      "wifi": "Alderaan Legacy",
+    },
+    "type": "Feature",
+  },
+  Object {
+    "geometry": Object {
       "coordinates": Object {
         "latitude": 37.3318,
         "longitude": -122.030581,
@@ -33,63 +55,39 @@ Array [
     },
     "type": "Feature",
   },
-  Object {
-    "geometry": Object {
-      "coordinates": Array [
-        9.726020060879991,
-        52.38405362185702,
-      ],
-      "type": "Point",
-    },
-    "properties": Object {
-      "altitude": 55,
-      "battery_level": 0.7699999809265137,
-      "battery_state": "unplugged",
-      "device_id": "iphonex",
-      "horizontal_accuracy": 65,
-      "motion": Array [],
-      "speed": -1,
-      "timestamp": "2021-08-03T09:44:24Z",
-      "vertical_accuracy": 20,
-      "wifi": "Alderaan Legacy",
-    },
-    "type": "Feature",
-  },
 ]
 `;
 
 exports[`save trip 1`] = `
-Array [
-  Object {
-    "distance": 502,
-    "end_location": Object {
-      "geometry": Object {
-        "coordinates": Array [
-          7.523156745969733,
-          51.5029763593054,
-        ],
-        "type": "Point",
-      },
-      "properties": Object {
-        "timestamp": "2021-12-02T09:10:07Z",
-      },
-      "type": "Feature",
+Object {
+  "distance": 28,
+  "end_location": Object {
+    "geometry": Object {
+      "coordinates": Array [
+        9.725874185130364,
+        52.38419436608723,
+      ],
+      "type": "Point",
     },
-    "mode": "Car",
-    "start": "2021-12-02T09:04:02Z",
-    "start_location": Object {
-      "geometry": Object {
-        "coordinates": Array [
-          7.52318470085059,
-          51.50297170104519,
-        ],
-        "type": "Point",
-      },
-      "properties": Object {
-        "timestamp": "2021-12-02T09:04:02Z",
-      },
-      "type": "Feature",
+    "properties": Object {
+      "timestamp": "2022-01-23T18:05:08Z",
     },
+    "type": "Feature",
   },
-]
+  "mode": "Bus",
+  "start": "2022-01-23T18:04:02Z",
+  "start_location": Object {
+    "geometry": Object {
+      "coordinates": Array [
+        9.7258859561318,
+        52.38420901449808,
+      ],
+      "type": "Point",
+    },
+    "properties": Object {
+      "timestamp": "2022-01-23T18:04:02Z",
+    },
+    "type": "Feature",
+  },
+}
 `;

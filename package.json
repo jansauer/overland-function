@@ -1,6 +1,6 @@
 {
   "name": "overland-function",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Function for receiving and storing locations from overland.",
   "homepage": "https://github.com/jansauer/overland-function",
   "repository": "github:jansauer/overland-function",
@@ -10,7 +10,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --colors",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --colors",
     "lint": "npm run lint:node && npm run lint:prettier && npm run lint:js",
     "lint:node": "grep -q $(node -v | cut -c2-) .node-version && grep -q $(node -v | cut -c2-) Dockerfile",
     "lint:prettier": "prettier --check .",

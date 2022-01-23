@@ -2,17 +2,10 @@ import { app } from "../server.js";
 import request from "supertest";
 
 afterAll(async () => {
-  const client = await app.context.mongo;
-  await client.close();
+  await app.context.mongo.close();
 });
 
 test("save locations", async () => {
-  const client = await app.context.mongo;
-  const collection = client.db().collection("locations");
-
-  // cleanup
-  await collection.deleteMany({});
-
   const response = await request(app.callback())
     .post("/ingest")
     .send({
@@ -69,10 +62,14 @@ test("save locations", async () => {
 
   expect(response.status).toBe(200);
   expect(response.header["content-type"]).toMatch("application/json");
-  expect(response.text).toBe('{"result":"ok"}');
+  expect(response.body).toEqual({ result: "ok" });
 
-  const locations = await collection.find({}, { projection: { _id: 0 } }).toArray();
-  expect(locations).toMatchSnapshot();
+  const findResult = await app.context.locations
+    .find({}, { projection: { _id: 0 } })
+    .sort({ $natural: -1 })
+    .limit(2)
+    .toArray();
+  expect(findResult).toMatchSnapshot();
 });
 
 test("return error on missing locations", async () => {
@@ -94,12 +91,6 @@ test("return error on empty locations", async () => {
 });
 
 test("save trip", async () => {
-  const client = await app.context.mongo;
-  const collection = client.db().collection("trips");
-
-  // cleanup
-  await collection.deleteMany({});
-
   const response = await request(app.callback())
     .post("/ingest")
     .send({
@@ -109,27 +100,27 @@ test("save trip", async () => {
         },
       ],
       trip: {
-        distance: 502,
-        mode: "Car",
-        start: "2021-12-02T09:04:02Z",
+        distance: 28,
+        mode: "Bus",
+        start: "2022-01-23T18:04:02Z",
         start_location: {
           type: "Feature",
           geometry: {
             type: "Point",
-            coordinates: [7.52318470085059, 51.50297170104519],
+            coordinates: [9.7258859561318, 52.38420901449808],
           },
           properties: {
-            timestamp: "2021-12-02T09:04:02Z",
+            timestamp: "2022-01-23T18:04:02Z",
           },
         },
         current_location: {
           type: "Feature",
           geometry: {
             type: "Point",
-            coordinates: [7.523156745969733, 51.5029763593054],
+            coordinates: [9.725874185130364, 52.38419436608723],
           },
           properties: {
-            timestamp: "2021-12-02T09:10:07Z",
+            timestamp: "2022-01-23T18:05:08Z",
           },
         },
       },
@@ -137,21 +128,18 @@ test("save trip", async () => {
 
   expect(response.status).toBe(200);
   expect(response.header["content-type"]).toMatch("application/json");
-  expect(response.text).toBe('{"result":"ok"}');
+  expect(response.body).toEqual({ result: "ok" });
 
-  const trips = await collection.find({}, { projection: { _id: 0 } }).toArray();
+  const trips = await app.context.trips.findOne(
+    {},
+    { projection: { _id: 0 }, sort: { $natural: -1 } }
+  );
   expect(trips).toMatchSnapshot();
 });
 
 test("update existing trip", async () => {
-  const client = await app.context.mongo;
-  const collection = client.db().collection("trips");
-
-  // cleanup
-  await collection.deleteMany({});
-
   // prior trip information
-  await collection.insert({
+  const existing = await app.context.trips.insertOne({
     distance: 401,
     mode: "Car",
     start: "2021-12-02T09:04:02Z",
@@ -214,18 +202,16 @@ test("update existing trip", async () => {
 
   expect(response.status).toBe(200);
   expect(response.header["content-type"]).toMatch("application/json");
-  expect(response.text).toBe('{"result":"ok"}');
+  expect(response.body).toEqual({ result: "ok" });
 
-  const trips = await collection.find({}, { projection: { _id: 0 } }).toArray();
-  expect(trips.length).toBe(1);
-  expect(trips[0].distance).toBe(502);
-  expect(trips[0].end_location.geometry.coordinates[1]).toBe(51.5029763593054);
-  expect(trips[0].end_location.properties.timestamp).toBe("2021-12-02T09:10:07Z");
+  const updated = await app.context.trips.findOne({ _id: existing.insertedId });
+  expect(updated.distance).toBe(502);
+  expect(updated.end_location.geometry.coordinates[1]).toBe(51.5029763593054);
+  expect(updated.end_location.properties.timestamp).toBe("2021-12-02T09:10:07Z");
 });
 
 test("return error on persistence error", async () => {
-  const client = await app.context.mongo;
-  await client.close();
+  await app.context.mongo.close();
 
   const response = await request(app.callback())
     .post("/ingest")
@@ -237,7 +223,7 @@ test("return error on persistence error", async () => {
       ],
     });
 
-  expect(response.status).toBe(400);
+  expect(response.status).toBe(500);
   expect(response.header["content-type"]).toMatch("text/plain");
-  expect(response.text).toBe("Unable to ingest");
+  expect(response.text).toBe("Internal Server Error");
 });

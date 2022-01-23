@@ -1,22 +1,16 @@
-const LOCATION_COLLECTION = "locations";
-const TRIP_COLLECTION = "trips";
+export async function stats(ctx) {
+  const totalLocations = await ctx.locations.countDocuments();
+  console.log(`Found ${totalLocations} stored locations`);
 
-export async function statsHandler(ctx) {
-  const client = await ctx.mongo;
+  const totalTrips = await ctx.trips.countDocuments();
+  console.log(`Found ${totalTrips} stored trips`);
 
-  try {
-    const locations = await client.db().collection(LOCATION_COLLECTION).countDocuments();
-    console.log(`Fount ${locations} stored locations`);
+  const latestLocation = await ctx.locations.findOne({}, { sort: { $natural: -1 } });
+  console.log(`Found latest location ${JSON.stringify(latestLocation)}`);
 
-    const trips = await client.db().collection(TRIP_COLLECTION).countDocuments();
-    console.log(`Fount ${trips} stored trips`);
-
-    ctx.body = {
-      locations: locations,
-      trips: trips,
-    };
-  } catch (error) {
-    console.error(error);
-    ctx.throw(400, "Unable to interact with the database");
-  }
+  ctx.body = {
+    totalLocations,
+    totalTrips,
+    latestLocation: latestLocation?.properties?.timestamp,
+  };
 }
