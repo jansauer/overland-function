@@ -1,6 +1,6 @@
 {
   "name": "overland-function",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Function for receiving and storing locations from overland.",
   "homepage": "https://github.com/jansauer/overland-function",
   "repository": "github:jansauer/overland-function",
@@ -20,13 +20,13 @@
     "koa": "2.13.4",
     "koa-bodyparser": "4.3.0",
     "koa-router": "10.1.1",
-    "mongodb": "4.3.0"
+    "mongodb": "4.3.1"
   },
   "devDependencies": {
-    "eslint": "8.6.0",
+    "eslint": "8.7.0",
     "eslint-config-prettier": "8.3.0",
-    "jest": "27.4.6",
+    "jest": "27.4.7",
     "prettier": "2.5.1",
-    "supertest": "6.1.6"
+    "supertest": "6.2.2"
   }
 }
