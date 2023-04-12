@@ -1,4 +1,4 @@
-FROM node:18.12.1-alpine3.15
+FROM node:19.2.0-alpine3.15
 
 LABEL maintainer "Jan Sauer <jan@jansauer.de> (https://jansauer.de/)"
 
